@@ -1,0 +1,73 @@
+{
+  "name": "globalcorp-sim",
+  "version": "1.0.0",
+  "description": "Simulatore gestionale di multinazionale — Electron + Vite + React + TypeScript",
+  "main": "dist-electron/main.js",
+  "author": "You",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "electron": "vite-plugin-electron",
+    "start": "concurrently -k \"vite\" \"vite-plugin-electron -r\"",
+    "build": "vite build && vite-plugin-electron -b",
+    "postbuild": "cpy ./build/icon.png ./dist-electron/ --flat",
+    "dist": "npm run build && electron-builder",
+    "lint": "echo \"(lint optional)\""
+  },
+  "dependencies": {
+    "concurrently": "^9.0.1",
+    "immer": "^10.1.1",
+    "lucide-react": "^0.452.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^2.12.7",
+    "zustand": "^4.5.5",
+    "framer-motion": "^11.3.31"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.4",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react": "^4.3.2",
+    "autoprefixer": "^10.4.20",
+    "cpy-cli": "^5.0.0",
+    "electron": "^31.3.0",
+    "electron-builder": "^25.1.8",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.14",
+    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vite-plugin-electron": "^0.28.9"
+  },
+  "build": {
+    "appId": "com.yourcompany.globalcorpsim",
+    "files": [
+      "dist/**",
+      "dist-electron/**",
+      "build/**"
+    ],
+    "directories": {
+      "buildResources": "build"
+    },
+    "win": {
+      "target": "msi",
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": true,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "GlobalCorp-Sim-${version}-Setup.${ext}"
+    },
+    "msi": {
+      "oneClick": false,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "artifactName": "GlobalCorp-Sim-${version}-Setup.msi",
+      "warningsAsErrors": false
+    }
+  }
+}
